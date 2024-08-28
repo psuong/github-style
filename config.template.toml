@@ -2,7 +2,6 @@ baseURL = "https://meik2333.com/"
 languageCode = "zh-cn"
 title = "MeiK's blog"
 theme = "github-style"
-googleAnalytics = "UA-123456-789"
 pygmentsCodeFences = true
 pygmentsUseClasses = true
 
@@ -20,11 +19,13 @@ pygmentsUseClasses = true
   keywords = "blog, google analytics"
   rss = true
   lastmod = true
-  favicon = "/images/github.png"
+  favicon = "/images/github-mark.png"
+  avatar = "/images/avatar.png"
+  headerIcon = "/images/github-mark-white.png"
   location = "China"
   userStatusEmoji = "😀"
   enableGitalk = true
-    
+
   [params.gitalk]
     clientID = "Your client ID" # Your client ID
     clientSecret = "Your client secret" # Your client secret
@@ -36,7 +37,7 @@ pygmentsUseClasses = true
     perPage = 15 # Pagination size, with maximum 100.
     pagerDirection = "last" # Comment sorting direction, available values are 'last' and 'first'.
     createIssueManually = true # 设置为true，如果是管理员登录，会自动创建issue，如果是false，需要管理员手动添加第一个评论(issue)
-    distractionFreeMode = false # Enable hot key (cmd|ctrl + enter) submit comment.    
+    distractionFreeMode = false # Enable hot key (cmd|ctrl + enter) submit comment.
     proxy = "https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token" # 可以自行添加反向代理
   [[params.links]]
     title = "Link"
@@ -48,3 +49,7 @@ pygmentsUseClasses = true
 
 [frontmatter]
   lastmod = ["lastmod", ":fileModTime", ":default"]
+
+[services]
+  [services.googleAnalytics]
+    ID = "UA-123456-789"
