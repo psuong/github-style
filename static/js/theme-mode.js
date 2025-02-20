@@ -3,10 +3,12 @@ function switchTheme() {
   if (currentStyle === 'light') {
     setTheme('dark')
     setIconTheme('dark')
+    setUtterancesTheme('github-dark')
   }
   else {
     setTheme('light')
     setIconTheme('light')
+    setUtterancesTheme('github-light')
   }
 }
 
@@ -16,6 +18,17 @@ function setTheme(style) {
   });
   document.documentElement.setAttribute('data-color-mode', style);
   localStorage.setItem('data-color-mode', style);
+}
+
+function setUtterancesTheme(theme) {
+    const utterancesFrame = document.querySelector('.utterances-frame');
+    if (utterancesFrame) {
+        const message = {
+            type: 'set-theme',
+            theme: theme === 'dark' ? 'github-dark' : 'github-light'
+        };
+        utterancesFrame.contentWindow.postMessage(message, 'https://utteranc.es');
+    }
 }
 
 function setIconTheme(theme) {
