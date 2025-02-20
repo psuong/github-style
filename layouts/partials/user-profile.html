@@ -124,6 +124,12 @@
           </a>
           {{ end }}
 
+          {{ if .Site.Params.mastodon }}
+          <a style="margin: 0 10px 10px 0;" href="https://mastodon.gamedev.place/deck/{{ .Site.Params.mastodon }}">
+            <img alt="@mastodon" width="32" height="32" src="{{ "images/mastodon.png" | absURL }}" class="avatar">
+          </a>
+          {{ end }}
+
           {{ if .Site.Params.facebook}}
           <a style="margin: 0 10px 10px 0;" href="https://facebook.com/{{ .Site.Params.facebook }}">
             <img alt="@facebook" width="32" height="32" src="{{ "images/facebook.png" | absURL }}" class="avatar">
