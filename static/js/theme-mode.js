@@ -3,12 +3,12 @@ function switchTheme() {
   if (currentStyle === 'light') {
     setTheme('dark')
     setIconTheme('dark')
-    setUtterancesTheme('github-dark')
+    updateUtterancesTheme('dark')
   }
   else {
     setTheme('light')
     setIconTheme('light')
-    setUtterancesTheme('github-light')
+    updateUtterancesTheme('light')
   }
 }
 
@@ -20,15 +20,24 @@ function setTheme(style) {
   localStorage.setItem('data-color-mode', style);
 }
 
-function setUtterancesTheme(theme) {
-    const utterancesFrame = document.querySelector('.utterances-frame');
-    if (utterancesFrame) {
-        const message = {
-            type: 'set-theme',
-            theme: theme === 'dark' ? 'github-dark' : 'github-light'
-        };
-        utterancesFrame.contentWindow.postMessage(message, 'https://utteranc.es');
+function updateUtterancesTheme(theme) {
+    const utterancesContainer = document.querySelector('.utterances');
+
+    if (utterancesContainer) {
+        utterancesContainer.remove(); // Remove existing Utterances iframe
     }
+
+    const repo = "{{ .Site.Params.utterancesRepo }}"; // Use Hugo variable
+
+    const newScript = document.createElement("script");
+    newScript.src = "https://utteranc.es/client.js";
+    newScript.setAttribute("repo", repo);
+    newScript.setAttribute("issue-term", "pathname");
+    newScript.setAttribute("theme", theme === "dark" ? "github-dark" : "github-light");
+    newScript.setAttribute("crossorigin", "anonymous");
+    newScript.async = true;
+
+    document.body.appendChild(newScript); // Append the new script to reload Utterances
 }
 
 function setIconTheme(theme) {

@@ -24,8 +24,9 @@ pygmentsUseClasses = true
   headerIcon = "/images/github-mark-white.png"
   location = "China"
   userStatusEmoji = "😀"
-  enableGitalk = true
+  enableGitalk = false
   enableSearch = true
+  utterancesRepo = ""
 
   [params.gitalk]
     clientID = "Your client ID" # Your client ID
