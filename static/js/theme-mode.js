@@ -21,23 +21,15 @@ function setTheme(style) {
 }
 
 function updateUtterancesTheme(theme) {
-    const utterancesContainer = document.querySelector('.utterances');
-
-    if (utterancesContainer) {
-        utterancesContainer.remove(); // Remove existing Utterances iframe
-    }
-
-    const repo = "{{ .Site.Params.utterancesRepo }}"; // Use Hugo variable
-
-    const newScript = document.createElement("script");
-    newScript.src = "https://utteranc.es/client.js";
-    newScript.setAttribute("repo", repo);
-    newScript.setAttribute("issue-term", "pathname");
-    newScript.setAttribute("theme", theme === "dark" ? "github-dark" : "github-light");
-    newScript.setAttribute("crossorigin", "anonymous");
-    newScript.async = true;
-
-    document.body.appendChild(newScript); // Append the new script to reload Utterances
+  const newTheme = document.documentElement.getAttribute('data-color-mode');
+  const utterancesFrame = document.querySelector('.utterances-frame');
+  if (utterancesFrame) {
+    const message = {
+      type: 'set-theme',
+      theme: newTheme === 'dark' ? 'github-dark' : 'github-light'
+    };
+    utterancesFrame.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
 }
 
 function setIconTheme(theme) {
@@ -71,3 +63,17 @@ function currentTheme() {
 (() => {
   setTheme(currentTheme());
 })();
+
+document.addEventListener("DOMContentLoaded", () => {
+  const savedTheme = localStorage.getItem('data-color-mode') || 'light';
+  document.documentElement.setAttribute('data-color-mode', savedTheme);
+
+  const utterancesFrame = document.querySelector('.utterances-frame');
+  if (utterancesFrame) {
+    const message = {
+      type: 'set-theme',
+      theme: savedTheme === 'dark' ? 'github-dark' : 'github-light'
+    };
+    utterancesFrame.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+});

@@ -98,8 +98,10 @@
 <script type="application/javascript" src='{{ "js/toc.js" | absURL }}'></script>
 <link rel="stylesheet" href='{{ "css/toc.css" | absURL }}' />
 
+<div id="comments"></div>
+
 <script src="https://utteranc.es/client.js"
-    repo="{{ Site.Params.utterancesRepo }}"
+    repo="{{ .Site.Params.utterancesRepo }}"
     issue-term="pathname"
     theme="preferred-color-scheme"
     crossorigin="anonymous"
